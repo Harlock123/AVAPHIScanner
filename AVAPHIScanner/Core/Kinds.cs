@@ -85,7 +85,7 @@ public enum PolicyKind
     Custom,
 }
 
-/// <summary>What Safe Harbor does with dates.</summary>
+/// <summary>What Safe Harbor does with dates (a new project's policy keeps only the year).</summary>
 [JsonConverter(typeof(JsonStringEnumConverter<DateMode>))]
 public enum DateMode
 {

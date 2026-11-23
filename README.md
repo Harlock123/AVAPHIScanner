@@ -8,9 +8,9 @@ A safe first AI pilot on healthcare data starts by knowing where the PHI is and 
 Scanner does both: point it at a folder of extracts or a database, read the inventory (which columns hold names, SSNs,
 member IDs, dates, addresses; what's hidden in the free-text notes; how risky each table is), correct what it got wrong,
 choose a policy (HIPAA Safe Harbor, a limited data set, or your own per-column choices) and write a copy. Member IDs
-become keyed tokens, so the same member is the same token in every file and table and the copy still joins; each
-person's dates move by the same number of days, so intervals stay true; amounts and clinical values are copied as they
-are, so totals still balance. Then it re-scans the copy and tells you what, if anything, is left.
+become keyed tokens, so the same member is the same token in every file and table and the copy still joins; dates keep
+only their year (or, if you need intervals, each person's dates move by the same number of days); amounts and clinical
+values are copied as they are, so totals still balance. Then it re-scans the copy and tells you what, if anything, is left.
 
 It also has an **AI Chat** (F12) and an **MCP server**, so Claude or a model on your own computer can do the same work in
 the window. **Agents never see a raw value**: everything they are sent is masked, and nothing turns that off. See
@@ -94,7 +94,7 @@ tables become CSV files or one SQLite database.
 |---|---|
 | Names | Made-up names, word by word, keeping their shape ("Lopez, Maria" → "Talbot, Quinn"; "Dr." and "Jr." stay) |
 | SSNs, MRNs, member, account, claim, licence, vehicle and device numbers | Keyed tokens `ID-XXXXXXXXXX`: the same value always gets the same token, in every file, table and run with the same key, so joins still work |
-| Dates | Moved back 1 to 365 days, the same number for every date of the same person (by member ID, else MRN, else SSN), so intervals stay true; or, with **Dates: year only**, just the year |
+| Dates | Just the year (**Dates: year only**, the default); or, with **Dates: shifted per person**, moved back 1 to 365 days, the same number for every date of the same person (by member ID, else MRN, else SSN), so intervals stay true |
 | Birth dates over 89 years ago | 1 January of the year 90 years ago |
 | ZIP codes | The first three digits; `000` for the 17 three-digit areas of 20,000 people or fewer (the HHS list is bundled) |
 | Ages over 89 | `90+` |
@@ -112,15 +112,16 @@ date, generalise (dates to the year, ZIP codes to three digits, ages over 89 to 
 gives the same tokens next month, so months join. Never send it with the copy; whoever has it and the original data
 can work out which token is whose. Two things to know:
 
-- **Shifted dates keep intervals but go beyond Safe Harbor's own rule**, which keeps only the year. A copy with
-  shifted dates rests on an expert determination; for strict Safe Harbor choose **Dates: year only**.
+- **Dates keep only their year by default**, Safe Harbor's own rule. **Dates: shifted per person** keeps intervals
+  (lengths of stay, days between visits) but goes beyond that rule: a copy with shifted dates rests on an expert
+  determination.
 - **Keyed tokens are derived from the identifiers.** HHS's guidance (§164.514(c)) is careful about re-identification
   codes derived from identifiers: keep the key secret and away from recipients, and have the method reviewed if in doubt.
 
 **Verify** re-scans the copy: every value the policy removes that is still there is reported, masked, by place, as is
 any original value from the sources (it checks for the values the source scan saw, not just their look), with a
-before/after count by kind. Shifted dates are counted as kept by the policy; under the year-only rule they would count
-as left.
+before/after count by kind. Under the year-only rule a full date left in is reported; with shifted dates, dates are
+counted as kept by the policy.
 
 ## Projects
 
@@ -134,7 +135,7 @@ keep project files private. Scan results aren't saved: scan again after opening.
 AVAPHIScanner --scan samples --report inventory.xlsx
 AVAPHIScanner --scan sqlite:samples/clinic.db --report clinic.html
 AVAPHIScanner --deidentify samples --policy safe-harbor --key-file keys/phi.key --out deidentified
-AVAPHIScanner --deidentify project.phiscan --dates year --key-file keys/phi.key --out deidentified --report check.html
+AVAPHIScanner --deidentify project.phiscan --dates shift --key-file keys/phi.key --out deidentified --report check.html
 AVAPHIScanner --verify deidentified --against samples
 ```
 

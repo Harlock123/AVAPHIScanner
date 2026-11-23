@@ -75,8 +75,8 @@
                     <ComboBoxItem Content="Custom (per-column actions)" />
                 </ComboBox>
                 <ComboBox x:Name="cboDates" HorizontalAlignment="Stretch" SelectionChanged="OnPolicyChanged">
-                    <ComboBoxItem Content="Dates: shifted per person" />
                     <ComboBoxItem Content="Dates: year only" />
+                    <ComboBoxItem Content="Dates: shifted per person" />
                 </ComboBox>
                 <TextBlock x:Name="txtPolicy" TextWrapping="Wrap" FontSize="11" Opacity="0.75" />
                 <Button x:Name="cmdDeidentify" Content="De-identify..." HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" Click="OnDeidentifyClick" />

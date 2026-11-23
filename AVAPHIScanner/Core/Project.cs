@@ -22,7 +22,7 @@ public sealed class Policy
 {
     [JsonPropertyName("kind")] public PolicyKind Kind { get; set; } = PolicyKind.SafeHarbor;
 
-    [JsonPropertyName("date_mode")] public DateMode DateMode { get; set; } = DateMode.Shift;
+    [JsonPropertyName("date_mode")] public DateMode DateMode { get; set; } = DateMode.Year;
 
     /// <summary>Column actions by column key, for a custom policy.</summary>
     [JsonPropertyName("actions")] public Dictionary<string, ColumnAction> Actions { get; set; } = [];
@@ -43,7 +43,7 @@ public sealed class Policy
         return action;
     }
 
-    /// <summary>"Safe Harbor (dates shifted)", "Custom: 2 column actions"…</summary>
+    /// <summary>"Safe Harbor (dates to year only)", "Custom: 2 column actions"…</summary>
     public string Describe() => Kind switch
     {
         PolicyKind.LimitedDataSet => "Limited Data Set (dates, city, state, ZIP code and ages kept)",

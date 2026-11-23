@@ -165,7 +165,7 @@ public partial class MainWindow : Window
             var p = _history.Current;
             lstSources.ItemsSource = p.Sources.Select(s => $"{s.Id}  {SourceText(s)}").ToList();
             cboPolicy.SelectedIndex = (int)p.Policy.Kind;
-            cboDates.SelectedIndex = p.Policy.DateMode == DateMode.Year ? 1 : 0;
+            cboDates.SelectedIndex = p.Policy.DateMode == DateMode.Shift ? 1 : 0;
             cboDates.IsEnabled = p.Policy.Kind != PolicyKind.LimitedDataSet;
             txtPolicy.Text = p.Policy.Describe() + ".";
             ShowInventory(p);
@@ -372,7 +372,7 @@ public partial class MainWindow : Window
     {
         if (_filling || cboPolicy.SelectedIndex < 0 || cboDates.SelectedIndex < 0) return;
         var kind = (PolicyKind)cboPolicy.SelectedIndex;
-        var dates = cboDates.SelectedIndex == 1 ? DateMode.Year : DateMode.Shift;
+        var dates = cboDates.SelectedIndex == 1 ? DateMode.Shift : DateMode.Year;
         var now = _history.Current.Policy;
         if (now.Kind == kind && now.DateMode == dates) return;
         Change($"Policy: {Kinds.Label(kind)}", p =>

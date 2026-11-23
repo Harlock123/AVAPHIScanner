@@ -380,10 +380,10 @@ public sealed partial class ScanTools(IScanHost host)
         }, cancel);
 
     [McpServerTool(Name = "set_policy")]
-    [Description("Sets how the copy is made: policy safe_harbor, limited_data_set or custom; date_mode shift (each person's dates moved by the same number of days, intervals kept) or year (only the year kept, Safe Harbor's own rule); person_key, the column that says whose row it is (default: member ID, else MRN, else SSN); database_output csv or sqlite for database tables. Leave out what stays as it is.")]
+    [Description("Sets how the copy is made: policy safe_harbor, limited_data_set or custom; date_mode year (only the year kept, Safe Harbor's own rule, and the default) or shift (each person's dates moved by the same number of days, intervals kept, which goes beyond Safe Harbor's rule); person_key, the column that says whose row it is (default: member ID, else MRN, else SSN); database_output csv or sqlite for database tables. Leave out what stays as it is.")]
     public Task<string> SetPolicy(
         [Description("safe_harbor, limited_data_set or custom. Optional.")] string? policy = null,
-        [Description("shift or year. Optional.")] string? date_mode = null,
+        [Description("year (the default) or shift. Optional.")] string? date_mode = null,
         [Description("A column name that identifies the person in each table, for date shifting (\"member_id\"). Give \"\" for the default. Optional.")] string? person_key = null,
         [Description("csv (a file per table) or sqlite (one database), for database sources. Optional.")] string? database_output = null,
         CancellationToken cancel = default) =>

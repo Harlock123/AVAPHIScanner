@@ -221,6 +221,9 @@ public sealed class AgentTests
         }
         var ids = rig.Ok("preview_deidentification", new { column = rig.Id("members.csv › member_id") });
         Assert.All(ids.GetProperty("samples").EnumerateArray(), s => Assert.Matches(@"^ID-[A-Z2-7]{10}$", s.GetProperty("after").GetString()));
+        var years = rig.Ok("preview_deidentification", new { column = rig.Id("members.csv › dob") });   // the default: year only
+        Assert.All(years.GetProperty("samples").EnumerateArray(), s => Assert.Matches(@"^\d{4}$", s.GetProperty("after").GetString()));
+        rig.Ok("set_policy", new { policy = "safe_harbor", date_mode = "shift" });
         var dates = rig.Ok("preview_deidentification", new { column = rig.Id("members.csv › dob") });
         Assert.All(dates.GetProperty("samples").EnumerateArray(), s => Assert.Matches(@"^\d{4}-\*\*-\*\*", s.GetProperty("after").GetString()));
         var text = rig.Ok("preview_deidentification", new { column = "notes/note-001.txt › (text)", max = 3 });

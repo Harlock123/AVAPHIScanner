@@ -160,7 +160,7 @@ public sealed class DeidentifyTests
     [Fact]
     public void A_safe_harbor_copy_keeps_joins_intervals_and_totals_across_every_file_and_table()
     {
-        var (p, inv, root) = Scanned();
+        var (p, inv, root) = Scanned(p => p.Policy.DateMode = DateMode.Shift);
         var output = Write(p, inv, root);
         var d = new Deidentifier(Samples.Key, p.Policy, inv.Known, Samples.Today);
         var source = Samples.Members(Path.Combine(root, "samples"));
@@ -280,9 +280,18 @@ public sealed class DeidentifyTests
     }
 
     [Fact]
+    public void Year_only_is_the_default_date_rule()
+    {
+        Assert.Equal(DateMode.Year, new Project().Policy.DateMode);
+        Assert.Equal(DateMode.Year, System.Text.Json.JsonSerializer.Deserialize<Policy>("{}")!.DateMode);
+        Assert.Equal("Safe Harbor (dates to year only)", new Policy().Describe());
+        Assert.Equal(ColumnAction.Generalise, new Policy().ActionFor("", PhiKind.Date));
+    }
+
+    [Fact]
     public void Year_mode_keeps_only_years_and_verify_is_clean()
     {
-        var (p, inv, root) = Scanned(p => p.Policy.DateMode = DateMode.Year);
+        var (p, inv, root) = Scanned();
         var output = Write(p, inv, root);
         Assert.All(Samples.Members(output), m => Assert.Matches(@"^\d{4}$", m["dob"]));
         Assert.All(Samples.Members(output), m => Assert.Matches(@"^\d{4}$", m["enrolled_on"]));
@@ -296,7 +305,7 @@ public sealed class DeidentifyTests
     [Fact]
     public void Verify_is_clean_after_safe_harbor_and_reports_what_a_wrong_decision_leaves()
     {
-        var (p, inv, root) = Scanned();
+        var (p, inv, root) = Scanned(p => p.Policy.DateMode = DateMode.Shift);
         var output = Write(p, inv, root);
         var clean = Verifier.Verify(output, p.Policy, inv);
         Assert.True(clean.Clean, clean.Summary + string.Join("; ", clean.Leftovers.Select(l => $"{l.Where} {l.Kind} {l.Count}")));

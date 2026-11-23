@@ -66,14 +66,14 @@ public static class Recipes
         r.Step("Add the folder and scan it.", "add_source", new { path = f });
         r.Step(null, "scan", new { });
         r.Step("Doubtful columns first: ask the person about any you can't settle, and record their decision with set_classification.", "get_inventory", new { phi_only = false, below_confidence = 0.7 });
-        r.Step("Safe Harbor, with each person's dates shifted by the same number of days (intervals kept). For the strict Safe Harbor rule use date_mode year.", "set_policy", new { policy = "safe_harbor", date_mode = "shift" });
+        r.Step("Safe Harbor, with dates to the year only (Safe Harbor's own rule). If the vendor needs intervals between dates, date_mode shift moves each person's dates by the same number of days, but that goes beyond Safe Harbor and needs an expert determination.", "set_policy", new { policy = "safe_harbor", date_mode = "year" });
         r.Step("Look at what happens to names…", "preview_deidentification", new { column = "members.csv › last_name", max = 3 });
         r.Step("…to identifiers (tokens keep joins: the same member ID gets the same token in every file)…", "preview_deidentification", new { column = "members.csv › member_id", max = 3 });
         r.Step("…and to free text.", "preview_deidentification", new { column = "notes/note-001.txt › (text)", max = 2 });
         r.Step("Write the copy. The key file stays with the person, outside the copy.", "deidentify", new { output = o, key_file = "keys/vendor.key", overwrite = true });
         r.Step("Check the copy.", "verify", new { output = o });
         r.Step("A report to keep (and to send, if the vendor wants to see what was done).", "export_report", new { path = $"reports/{o}.html", overwrite = true });
-        return r.Text($"Tell the person: the copy is in {o}, what was replaced (by kind), whether verify found anything left, and that the key file must never go with the copy. Remind them that Safe Harbor also needs them to have no actual knowledge that what's left could identify someone, and that shifted dates go beyond Safe Harbor's own rule (date_mode year keeps only the year).");
+        return r.Text($"Tell the person: the copy is in {o}, what was replaced (by kind), whether verify found anything left, and that the key file must never go with the copy. Remind them that Safe Harbor also needs them to have no actual knowledge that what's left could identify someone, and that dates keep only their year (date_mode shift would keep intervals, but goes beyond Safe Harbor's own rule).");
     }
 
     [McpServerPrompt(Name = "limited_data_set_for_research", Title = "A limited data set for research")]
@@ -110,7 +110,7 @@ public static class Recipes
         r.Step("The policy the export should meet.", "set_policy", new { policy = "safe_harbor" });
         r.Step("Check the export.", "verify", new { output = e });
         r.Step("A report with the verification in it.", "export_report", new { path = "reports/export-check.html", overwrite = true });
-        return r.Text("Say plainly whether the export is clean. If not, list where something was left (masked), whether any were original values, and what to change (a column's classification or action) before making the export again. Shifted dates are reported as kept by the policy; with date_mode year they would count as left.");
+        return r.Text("Say plainly whether the export is clean. If not, list where something was left (masked), whether any were original values, and what to change (a column's classification or action) before making the export again. Under date_mode shift, shifted dates are reported as kept by the policy; under year (the default) a full date left in is reported.");
     }
 
     [McpServerPrompt(Name = "explain_table_risk", Title = "Explain the risk in a table")]
@@ -159,11 +159,11 @@ public static class Recipes
         {
             path = "steps/monthly-deidentification",
             overwrite = true,
-            description = "Adds a month's folder and sets Safe Harbor with shifted dates",
+            description = "Adds a month's folder and sets Safe Harbor with dates to the year",
             steps = new object[]
             {
                 new { tool = "add_source", args = new { path = "${folder}" } },
-                new { tool = "set_policy", args = new { policy = "safe_harbor", date_mode = "shift" } },
+                new { tool = "set_policy", args = new { policy = "safe_harbor", date_mode = "year" } },
             },
             parameters = new Dictionary<string, string> { ["folder"] = f },
         });

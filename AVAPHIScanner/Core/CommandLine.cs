@@ -9,8 +9,8 @@ public static class CommandLine
     public const string Usage = """
         AVAPHIScanner --scan SOURCE [--report FILE.xlsx|FILE.html] [--project FILE.phiscan] [--sample-rows N]
         AVAPHIScanner --deidentify SOURCE --out FOLDER --key-file FILE [--policy safe-harbor|limited-data-set|custom]
-                      [--dates shift|year] [--project FILE.phiscan] [--db-output csv|sqlite] [--overwrite] [--report FILE]
-        AVAPHIScanner --verify COPY [--against SOURCE] [--policy …] [--dates shift|year] [--report FILE]
+                      [--dates year|shift] [--project FILE.phiscan] [--db-output csv|sqlite] [--overwrite] [--report FILE]
+        AVAPHIScanner --verify COPY [--against SOURCE] [--policy …] [--dates year|shift] [--report FILE]
 
           SOURCE is a file, a folder (read through sub-folders), a project (.phiscan, with its sources, decisions and
           policy), or a database: sqlite:PATH, sqlserver:"CONNECTION STRING" or postgres:"CONNECTION STRING".
