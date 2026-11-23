@@ -29,6 +29,7 @@ public static partial class Detect
         if (SsnDashedRx().Match(v) is { Success: true } sd)
         {
             if (ValidSsn(sd.Groups[1].Value, sd.Groups[2].Value, sd.Groups[3].Value)) hits.Add(new(PhiKind.Ssn, 0.95));
+            else if (TaxpayerShaped(sd.Groups[1].Value, sd.Groups[2].Value, sd.Groups[3].Value)) hits.Add(new(PhiKind.Ssn, 0.9));
             return hits;
         }
         if (Mbi(v)) { hits.Add(new(PhiKind.MemberId, 0.95)); return hits; }
@@ -103,11 +104,24 @@ public static partial class Detect
         return all is not ("078051120" or "219099999" or "123456789" or "111111111" or "333333333");
     }
 
-    /// <summary>An SSN written with dashes or spaces, or nine digits, that passes <see cref="ValidSsn"/>.</summary>
+    /// <summary>
+    /// Area 900-999, written like an SSN: never an SSN, but an ITIN (a taxpayer number, personal data too) or an
+    /// example number standing in for an SSN, as in test data. Counted only when written with dashes or spaces, so
+    /// nine bare digits (claim numbers and the like) still have to pass <see cref="ValidSsn"/>.
+    /// </summary>
+    public static bool TaxpayerShaped(string area, string group, string serial) =>
+        area[0] == '9' && group != "00" && serial != "0000";
+
+    /// <summary>
+    /// An SSN written with dashes or spaces that passes <see cref="ValidSsn"/> or is <see cref="TaxpayerShaped"/>, or
+    /// nine digits that pass <see cref="ValidSsn"/>.
+    /// </summary>
     public static bool Ssn(string v)
     {
         v = v.Trim();
-        if (SsnDashedRx().Match(v) is { Success: true } m) return ValidSsn(m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value);
+        if (SsnDashedRx().Match(v) is { Success: true } m)
+            return ValidSsn(m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value)
+                || TaxpayerShaped(m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value);
         return v.Length == 9 && v.All(char.IsAsciiDigit) && ValidSsn(v[..3], v[3..5], v[5..]);
     }
 

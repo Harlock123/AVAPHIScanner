@@ -58,7 +58,8 @@ public static partial class TextScan
         foreach (Match m in Ipv4Rx().Matches(text))
             if (Detect.IsIp(m.Value)) Add(m.Index, m.Length, PhiKind.IpAddress, 8);
         foreach (Match m in SsnRx().Matches(text))
-            if (Detect.ValidSsn(m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value)) Add(m.Index, m.Length, PhiKind.Ssn, 9);
+            if (Detect.ValidSsn(m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value)
+                || Detect.TaxpayerShaped(m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value)) Add(m.Index, m.Length, PhiKind.Ssn, 9);
         foreach (Match m in SsnLabelRx().Matches(text))
             if (Detect.Ssn(m.Groups[1].Value)) Add(m.Groups[1].Index, m.Groups[1].Length, PhiKind.Ssn, 9);
         foreach (Match m in PhoneRx().Matches(text))

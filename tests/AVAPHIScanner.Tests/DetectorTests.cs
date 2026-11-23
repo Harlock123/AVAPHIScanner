@@ -10,7 +10,7 @@ public sealed class DetectorTests
     [Theory]
     [InlineData("512-44-1093", true)]
     [InlineData("512 44 1093", true)]
-    [InlineData("900-12-3456", false)]   // area 900-999: not issued (ITINs live there)
+    [InlineData("900-12-3456", true)]    // area 900-999: never an SSN, but an ITIN or an example number, written like one
     [InlineData("000-12-3456", false)]
     [InlineData("666-12-3456", false)]
     [InlineData("512-00-1093", false)]   // group 00
@@ -190,7 +190,7 @@ public sealed class DetectorTests
     [Fact]
     public void Free_text_findings_with_their_kinds()
     {
-        const string note = "Member ID: M10001  MRN: MRN3578261\nPatient: Maria Lopez  DOB: 07/12/1958\nMs. Lopez lives at 591 Chestnut St, Springfield, IL 62704, phone (217) 555-0100, email maria.lopez@example.com. SSN 591-10-4714. Seen at https://portal.example.org from 192.0.2.84. Dr. Alan Brooks (NPI 1234567893).";
+        const string note = "Member ID: M10001  MRN: MRN3578261\nPatient: Maria Lopez  DOB: 07/12/1958\nMs. Lopez lives at 591 Chestnut St, Springfield, IL 62704, phone (217) 555-0100, email maria.lopez@example.com. SSN 912-34-5678. Seen at https://portal.example.org from 192.0.2.84. Dr. Alan Brooks (NPI 1234567893).";
         var f = TextScan.Find(note);
         var kinds = f.Select(x => x.Kind).ToHashSet();
         foreach (var k in new[] { PhiKind.MemberId, PhiKind.Mrn, PhiKind.Name, PhiKind.BirthDate, PhiKind.StreetAddress, PhiKind.City, PhiKind.Zip, PhiKind.Phone, PhiKind.Email, PhiKind.Ssn, PhiKind.Url, PhiKind.IpAddress, PhiKind.Npi })

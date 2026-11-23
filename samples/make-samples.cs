@@ -4,7 +4,7 @@
 #:property PublishAot=false
 // Makes the sample data in this folder: run `dotnet run make-samples.cs` here. Every person, number and note is made
 // up (a fixed seed, so the files come out the same each time). Phone numbers are in the 555-0100 to 555-0199 range kept for
-// fiction, emails at example.com and example.org, IP addresses in 192.0.2.0/24 (TEST-NET-1); SSNs, MRNs, NPIs and the
+// fiction, emails at example.com and example.org, IP addresses in 192.0.2.0/24 (TEST-NET-1); SSNs in the never-issued 9xx-01…49 range; MRNs, NPIs and the
 // rest are random numbers in the right shape. The same members (member_id M10001…) appear in every file, so the
 // de-identified copies can be joined again.
 using System.Globalization;
@@ -22,7 +22,9 @@ string[] streets = ["Maple St", "Oak Ave", "Cedar Ln", "Elm St", "Pine Rd", "Bir
 string[] plans = ["Gold PPO", "Silver HMO", "Bronze EPO", "Medicare Advantage"];
 
 string Digits(int n) => string.Concat(Enumerable.Range(0, n).Select(_ => (char)('0' + rng.Next(10))));
-string Ssn() => $"{rng.Next(100, 666):000}-{rng.Next(1, 100):00}-{rng.Next(1, 10000):0000}";
+// SSNs in area 900-999 with group 01-49: never issued, as an SSN or as an ITIN (whose groups are 50-65, 70-88,
+// 90-92 and 94-99), so no sample number can be anyone's. The scanner counts them as taxpayer-shaped numbers.
+string Ssn() => $"{rng.Next(900, 1000):000}-{rng.Next(1, 50):00}-{rng.Next(1, 10000):0000}";
 bool Luhn(string d) { var s = 0; var dbl = false; for (var i = d.Length - 1; i >= 0; i--) { var x = d[i] - '0'; if (dbl) { x *= 2; if (x > 9) x -= 9; } s += x; dbl = !dbl; } return s % 10 == 0; }
 string Npi() { var nine = "1" + Digits(8); for (var c = '0'; c <= '9'; c++) if (Luhn("80840" + nine + c)) return nine + c; throw new(); }
 

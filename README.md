@@ -53,7 +53,7 @@ The 18 identifiers of HIPAA's Safe Harbor method (45 CFR §164.514(b)(2)), and p
 | Ages over 89 | Age columns, birth dates, and "92-year-old", "aged 96" in text |
 | Phone and fax numbers | North American numbering rules (no area code or exchange starting 0 or 1); fax by header or by "fax" before it |
 | Email, web addresses, IP addresses | Patterns, with IPv4 octets checked and IPv6 parsed |
-| SSNs | Dashed or spaced, with the SSA's rules: no area 000, 666 or 900-999, no group 00, no serial 0000, not the famous invalid ones. Nine bare digits count only weakly, so a column of nine-digit claim numbers stays claim numbers |
+| SSNs | Dashed or spaced, with the SSA's rules: no area 000, 666 or 900-999, no group 00, no serial 0000, not the famous invalid ones. Area 900-999 written the same way counts too: an ITIN (a taxpayer number) or an example number standing in for an SSN. Nine bare digits count only weakly, and only when they pass the SSA's rules, so a column of nine-digit claim numbers stays claim numbers |
 | Medical record, member, account and claim numbers | Header hints, labels in text ("MRN:", "Member ID"), identifiers the scan found in ID columns, Medicare MBIs by their pattern, payment cards by issuer and Luhn check |
 | Licence and certificate numbers | Header hints, labels; DEA numbers by their checksum |
 | Vehicle and device identifiers | VINs by their check digit, IMEIs by Luhn, serial/UDI headers |
@@ -202,8 +202,9 @@ repeatable monthly de-identification.
 **Try it** on `samples/`: a made-up health plan's members (`members.csv`), claims and providers (`claims.xlsx`), twelve
 clinical notes (`notes/`), an eligibility and contact feed (`feed.jsonl`) and a small clinic database (`clinic.db`), all
 sharing member IDs so the copy's joins can be checked. Every person, number and note is invented: phone numbers are in
-the 555-0100 to 555-0199 range kept for fiction, emails at example.com, IP addresses in 192.0.2.0/24, and the SSNs,
-MRNs and NPIs are random numbers of the right shape. `samples/make-samples.cs` makes them again
+the 555-0100 to 555-0199 range kept for fiction, emails at example.com, IP addresses in 192.0.2.0/24, SSNs in
+9xx-01…49 (never issued, as an SSN or an ITIN, so none can be anyone's), and the MRNs and NPIs random numbers of the
+right shape. `samples/make-samples.cs` makes them again
 (`dotnet run make-samples.cs` in that folder).
 
 ## Technology Stack
