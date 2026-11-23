@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10019    MRN: MRN1390439
+Patient: Nancy Gallagher    DOB: 03/08/1954
+Visit date: 2026-05-14
+Provider: Dr. Alan Brooks (NPI 1831085935)
+
+Ms. Gallagher is a 72-year-old seen for follow-up of type 2 diabetes. She lives at 1540 Willow Way, Savannah, GA 31401 and can be reached at (912) 555-0118 or nancy.gallagher@example.com. Blood pressure 132/84, pulse 76. 
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on August 12, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

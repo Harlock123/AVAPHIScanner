@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10010    MRN: MRN0447547
+Patient: William Delgado    DOB: 04/15/1947
+Visit date: 2026-03-24
+Provider: Dr. Grace Whitman (NPI 1845356744)
+
+Mr. Delgado is a 78-year-old seen for low back pain after a fall. He lives at 2364 Aspen Ct, Tucson, AZ 85701 and can be reached at (520) 555-0109 or william.delgado@example.com. Blood pressure 132/84, pulse 76. 
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on June 22, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

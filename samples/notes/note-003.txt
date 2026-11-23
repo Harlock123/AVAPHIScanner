@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10007    MRN: MRN8404415
+Patient: Jennifer Haddad    DOB: 09/10/1933
+Visit date: 2026-03-07
+Provider: Dr. Samuel Ortiz (NPI 1476674126)
+
+Ms. Haddad is a 92-year-old seen for high blood pressure. She lives at 6480 Maple St, Claremont, NH 03601 and can be reached at (603) 555-0106 or jennifer.haddad@example.com. Blood pressure 132/84, pulse 76. 
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on June 5, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10025    MRN: MRN4603678
+Patient: Sandra Novak    DOB: 12/19/1977
+Visit date: 2026-06-17
+Provider: Dr. Samuel Ortiz (NPI 1476674126)
+
+Ms. Novak is a 48-year-old seen for high blood pressure. She lives at 142 Hawthorn Rd, Boise, ID 83702 and can be reached at (208) 555-0124 or sandra.novak@example.com. Blood pressure 132/84, pulse 76. She was referred by Paul Fontaine, a neighbour.
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on September 15, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10004    MRN: MRN9848641
+Patient: Robert Nguyen    DOB: 07/20/1976
+Visit date: 2026-02-18
+Provider: Dr. Priya Raman (NPI 1374358814)
+
+Mr. Nguyen is a 49-year-old seen for a cough for two weeks. He lives at 9222 Elm St, Savannah, GA 31401 and can be reached at (912) 555-0103 or robert.nguyen@example.com. Blood pressure 132/84, pulse 76. 
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on May 19, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

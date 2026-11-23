@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <Version>0.1.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.12" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.12" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.12" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.12" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.12">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="LAWgrid" Version="1.0.2" />
+    <!-- Reading and writing .xlsx (sources, de-identified copies and the report); LAWgrid uses the same version. -->
+    <PackageReference Include="ClosedXML" Version="0.104.2" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.14" />
+    <!-- SqlClient 6.1 pulls in Pkcs 9.0.11, which has known advisories; take the patched one. -->
+    <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.14" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+
+    <!-- AI agents (Agents/): the official C# MCP SDK (the server, client and transports), its Streamable HTTP
+         handler for the network door, and the official Anthropic SDK for the AI Chat. -->
+    <PackageReference Include="ModelContextProtocol.Core" Version="2.3.0" />
+    <PackageReference Include="ModelContextProtocol.AspNetCore" Version="2.3.0" />
+    <PackageReference Include="Anthropic" Version="13.3.0" />
+    <!-- The MCP server with no window: Avalonia headless with Skia, so pictures draw as in the window. -->
+    <PackageReference Include="Avalonia.Headless" Version="11.3.12" />
+    <PackageReference Include="Avalonia.Skia" Version="11.3.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The name lists and the restricted three-digit ZIP areas, read by Core/Lists.cs. -->
+    <EmbeddedResource Include="Core\Resources\*.txt" LogicalName="%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="AVAPHIScanner.Tests" />
+  </ItemGroup>
+</Project>

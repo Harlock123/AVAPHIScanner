@@ -1,0 +1,19 @@
+# Three-digit ZIP code areas with 20,000 people or fewer (HHS de-identification guidance, from the 2000 Census:
+# the 17 prefixes listed there). Under Safe Harbor these are written as 000. Check the current list before relying on it.
+036
+059
+063
+102
+203
+556
+692
+790
+821
+823
+830
+831
+878
+879
+884
+890
+893

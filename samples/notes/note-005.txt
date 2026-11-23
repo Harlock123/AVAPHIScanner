@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10013    MRN: MRN3318651
+Patient: Jessica Moreau    DOB: 08/05/2000
+Visit date: 2026-04-10
+Provider: Dr. Omar Haddad (NPI 1268864489)
+
+Ms. Moreau is a 25-year-old seen for chest pain on exertion. She lives at 6370 Spruce Ave, Boise, ID 83702 and can be reached at (208) 555-0112 or jessica.moreau@example.com. Blood pressure 132/84, pulse 76. She was referred by Charles Mendoza, a neighbour.
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on July 9, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

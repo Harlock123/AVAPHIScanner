@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10016    MRN: MRN2221679
+Patient: Thomas Sullivan    DOB: 06/23/1984
+Visit date: 2026-04-27
+Provider: Dr. Helen Park (NPI 1289603999)
+
+Mr. Sullivan is a 41-year-old seen for a medication review. He lives at 9734 Chestnut St, Columbus, OH 43215 and can be reached at (614) 555-0115 or thomas.sullivan@example.com. Blood pressure 132/84, pulse 76. 
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on July 26, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

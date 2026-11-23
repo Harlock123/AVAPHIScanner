@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10001    MRN: MRN3578261
+Patient: Maria Lopez    DOB: 07/12/1958
+Visit date: 2026-02-01
+Provider: Dr. Alan Brooks (NPI 1831085935)
+
+Ms. Lopez is a 67-year-old seen for follow-up of type 2 diabetes. She lives at 591 Chestnut St, Springfield, IL 62704 and can be reached at (217) 555-0100 or maria.lopez@example.com. Blood pressure 132/84, pulse 76. She was referred by Michael Castillo, a neighbour.
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on May 2, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

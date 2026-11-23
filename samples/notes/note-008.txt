@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10022    MRN: MRN2559926
+Patient: Matthew Pacheco    DOB: 03/22/1983
+Visit date: 2026-05-31
+Provider: Dr. Priya Raman (NPI 1374358814)
+
+Mr. Pacheco is a 43-year-old seen for a cough for two weeks. He lives at 1083 Oak Ave, Albany, NY 12207 and can be reached at (518) 555-0121 or matthew.pacheco@example.com. Blood pressure 132/84, pulse 76. 
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on August 29, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

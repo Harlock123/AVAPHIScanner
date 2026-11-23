@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10028    MRN: MRN2848999
+Patient: Steven Kimura    DOB: 07/21/1943
+Visit date: 2026-07-04
+Provider: Dr. Grace Whitman (NPI 1845356744)
+
+Mr. Kimura is a 82-year-old seen for low back pain after a fall. He lives at 2282 Birch Dr, Tucson, AZ 85701 and can be reached at (520) 555-0127 or steven.kimura@example.com. Blood pressure 132/84, pulse 76. 
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on October 2, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.

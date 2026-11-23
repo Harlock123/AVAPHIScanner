@@ -1,0 +1,9 @@
+Clinical note
+Member ID: M10034    MRN: MRN9301750
+Patient: Joshua Batista    DOB: 03/28/1932
+Visit date: 2026-08-07
+Provider: Dr. Helen Park (NPI 1289603999)
+
+Mr. Batista is a 94-year-old seen for a medication review. He lives at 6255 Elm St, Savannah, GA 31401 and can be reached at (912) 555-0133 or joshua.batista@example.com. Blood pressure 132/84, pulse 76. 
+
+Assessment: stable. Plan: recheck labs in 3 months; follow-up on November 5, 2026. Called the pharmacy at 312-555-0199 to confirm the prescription.
